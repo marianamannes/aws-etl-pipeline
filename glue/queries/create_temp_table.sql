@@ -1,0 +1,2 @@
+CREATE TEMPORARY TABLE {} (id INT NOT NULL AUTO_INCREMENT,
+                           PRIMARY KEY (`id`))

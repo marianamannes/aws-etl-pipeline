@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM {table} WHERE created_at = '{timestamp}'
