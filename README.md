@@ -47,4 +47,3 @@ The dataset used in this project was the Kaggle [Global Super Store Dataset](htt
 - [Connecting to MySQL Using Connector/Python](https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html) 
 - [Tutorial: Writing an AWS Glue for Spark script](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-intro-tutorial.html)
 - [GitHub Action to Sync S3 Bucket](https://github.com/jakejarvis/s3-sync-action)
-- [Video Tutorial](https://www.youtube.com/watch?v=cwX3XAx3CGg)
