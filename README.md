@@ -44,6 +44,7 @@ The dataset used in this project was the Kaggle [Global Super Store Dataset](htt
 
 ## Extras
 - Sync between GitHub and AWS S3 bucket with GitHub Actions.
+  
 
 ## References
 - [Build an ETL service pipeline to load data incrementally from Amazon S3 to Amazon Redshift using AWS Glue](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/build-an-etl-service-pipeline-to-load-data-incrementally-from-amazon-s3-to-amazon-redshift-using-aws-glue.html)
