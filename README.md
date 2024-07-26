@@ -3,7 +3,6 @@ This project aimed to utilize AWS services to create an ETL (Extract, Transform,
 
 ## Project Overview
 Key components and steps involved in this project include:
-
 1. AWS S3 
 2. AWS Lambda and event notification
 3. AWS Glue
