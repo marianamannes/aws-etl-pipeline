@@ -19,7 +19,6 @@ args = getResolvedOptions(sys.argv,
                            'MYSQL_DB'])
 
 # Set up Glue
-args = getResolvedOptions(sys.argv, ['JOB_NAME'])
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
