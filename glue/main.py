@@ -11,8 +11,9 @@ from mysql_client import MYSQLConnector
 # Job Parameters
 args = getResolvedOptions(sys.argv,
                           ['JOB_NAME',
-                           'BUCKET_NAME',
+                           'CSV_BUCKET',
                            'OBJECT_KEY',
+                           'QUERY_BUCKET',
                            'MYSQL_USER',
                            'MYSQL_PASSWORD',
                            'MYSQL_HOST',
@@ -26,10 +27,10 @@ job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
 # Connect to s3
-s3_client = S3Connector()
+s3_client = S3Connector(args['CSV_BUCKET'], args['QUERY_BUCKET'])
 
 # Get s3 object content
-dataset, dataset_len = s3_client.get_object('superstore-ingestion', 'dataset_1.csv')
+dataset, dataset_len = s3_client.get_df('dataset_1.csv')
 
 # Convert dataset to 3NF
 df_dict = Normalizer(dataset).create_distinct_dataframes({'categories': ['Category'],
@@ -43,7 +44,8 @@ df_dict = Normalizer(dataset).create_distinct_dataframes({'categories': ['Catego
                                                          })
 
 # Connect to MYSQL
-mysql_conn = MYSQLConnector(args['MYSQL_USER'], 
+mysql_conn = MYSQLConnector(s3_client,
+                            args['MYSQL_USER'], 
                             args['MYSQL_PASSWORD'], 
                             args['MYSQL_HOST'], 
                             args['MYSQL_DB'],
