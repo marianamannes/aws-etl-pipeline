@@ -6,9 +6,13 @@ class MYSQLConnector:
     def __init__(self, user, password, host, db, df_dict):
         print('--- Creating MYSQL connection ---')
         self.user = user
+        print(user)
         self.password = password
+        print(password)
         self.host = host
+        print(host)
         self.database = db
+        print(db)
         self.cnx = mysql.connector.connect(user=self.user, 
                                            password=self.password,
                                            host=self.host,
