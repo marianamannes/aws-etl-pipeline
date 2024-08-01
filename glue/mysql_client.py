@@ -13,7 +13,14 @@ class MYSQLConnector:
                                            password=self.password,
                                            host=self.host,
                                            database=self.database)
-        print('MYSQL connection created')
+        try:
+            if self.cnx.is_connected():
+                print("MYSQL connection created")
+            else:
+                print("Error in MYSQL connection")
+        except Error as e:
+            print(f"Error in MYSQL connection: {e}")
+
         self.cursor = self.cnx.cursor()
         self.df_dict = df_dict
         self.timestamp_now = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
