@@ -47,8 +47,8 @@ df_dict = create_distinct_dataframes(dataset,
                                       'customers': ['Customer ID', 'Customer Name'],
                                       'products': ['Product ID', 'Product Name', 'Category', 'Sub-Category'],
                                       'orders': ['Order ID', 'Order Date', 'Ship Date', 'Ship Mode', 'Customer ID', 'Order Priority'],
-                                       'order_items': ['Row ID', 'Product ID', 'Order ID', 'Sales', 'Quantity', 'Discount', 'Profit', 'Shipping Cost']
-                                        })
+                                      'order_items': ['Row ID', 'Product ID', 'Order ID', 'Sales', 'Quantity', 'Discount', 'Profit', 'Shipping Cost']
+                                      })
 
 # Connect to MYSQL
 mysql_client = MYSQLClient(args['MYSQL_USER'], 
