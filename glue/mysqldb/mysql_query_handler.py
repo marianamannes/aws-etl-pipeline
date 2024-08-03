@@ -1,5 +1,5 @@
 
-from mysqldb.utils import *
+from mysql_utils import *
 
 class QueryHandler:
     def __init__(self, mysql_client, query_loader, df_dict):
