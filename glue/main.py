@@ -4,9 +4,12 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
-from s3_client import S3Connector
-from normalize import Normalizer
-from mysql_client import MYSQLConnector
+from s3.client import S3Client
+from s3.query_loader import QueryLoader
+from mysqldb.client import MYSQLClient
+from mysqldb.query_handler import QueryHandler
+from s3.utils import *
+from utils import *
 
 # Job Parameters
 args = getResolvedOptions(sys.argv,
@@ -27,24 +30,28 @@ job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
 # Connect to s3
-s3_client = S3Connector(args['CSV_BUCKET'], args['QUERY_BUCKET'])
+s3_client = S3Client()
 
 # Get s3 object content
-dataset, dataset_len = s3_client.get_df('dataset_1.csv')
+dataset = get_s3_obj_df(s3_client, 'superstore-ingestion', 'dataset_3.csv')
+
+# Ge s3 object lenght
+dataset_len = len(dataset)
 
 # Convert dataset to 3NF
-df_dict = Normalizer(dataset).create_distinct_dataframes({'categories': ['Category'],
-                                                         'subcategories': ['Sub-Category'],
-                                                         'priorities': ['Order Priority'],
-                                                         'shipping': ['Ship Mode'],
-                                                         'customers': ['Customer ID', 'Customer Name'],
-                                                         'products': ['Product ID', 'Product Name', 'Category', 'Sub-Category'],
-                                                         'orders': ['Order ID', 'Order Date', 'Ship Date', 'Ship Mode', 'Customer ID', 'Order Priority'],
-                                                         'order_items': ['Row ID', 'Product ID', 'Order ID', 'Sales', 'Quantity', 'Discount', 'Profit', 'Shipping Cost']
-                                                         })
+df_dict = create_distinct_dataframes(dataset,
+                                     {'categories': ['Category'],
+                                      'subcategories': ['Sub-Category'],
+                                      'priorities': ['Order Priority'],
+                                      'shipping': ['Ship Mode'],
+                                      'customers': ['Customer ID', 'Customer Name'],
+                                      'products': ['Product ID', 'Product Name', 'Category', 'Sub-Category'],
+                                      'orders': ['Order ID', 'Order Date', 'Ship Date', 'Ship Mode', 'Customer ID', 'Order Priority'],
+                                       'order_items': ['Row ID', 'Product ID', 'Order ID', 'Sales', 'Quantity', 'Discount', 'Profit', 'Shipping Cost']
+                                        })
 
 # Connect to MYSQL
-mysql_conn = MYSQLConnector(s3_client,
+mysql_client = MYSQLClient(s3_client,
                             args['MYSQL_USER'], 
                             args['MYSQL_PASSWORD'], 
                             args['MYSQL_HOST'], 
@@ -52,12 +59,14 @@ mysql_conn = MYSQLConnector(s3_client,
                             df_dict)
 
 # Create temporary tables to ingest data from the csv
-mysql_conn.create_temp_tables()
+query_loader = QueryLoader(s3_client, args['QUERY_BUCKET'])
+query_handler = QueryHandler(mysql_client, query_loader, df_dict)
+query_handler.create_and_populate_temp_tables()
 
 # Insert datasets into MYSQL DW
-mysql_conn.insert_values()
+query_handler.insert_values_to_final_tables()
 
 # Validate ingestion
-mysql_conn.validate_ingestion(dataset_len, 'order_items')
+query_handler.validate_ingestion(dataset_len, 'order_items')
 
 job.commit()
