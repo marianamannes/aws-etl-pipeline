@@ -51,12 +51,10 @@ df_dict = create_distinct_dataframes(dataset,
                                         })
 
 # Connect to MYSQL
-mysql_client = MYSQLClient(s3_client,
-                            args['MYSQL_USER'], 
-                            args['MYSQL_PASSWORD'], 
-                            args['MYSQL_HOST'], 
-                            args['MYSQL_DB'],
-                            df_dict)
+mysql_client = MYSQLClient(args['MYSQL_USER'], 
+                           args['MYSQL_PASSWORD'], 
+                           args['MYSQL_HOST'], 
+                           args['MYSQL_DB'])
 
 # Create temporary tables to ingest data from the csv
 query_loader = QueryLoader(s3_client, args['QUERY_BUCKET'])
