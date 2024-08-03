@@ -1,4 +1,4 @@
-from s3.utils import *
+from s3_utils import *
 
 class QueryLoader:
     def __init__(self, s3_client, bucket):

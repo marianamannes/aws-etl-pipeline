@@ -4,11 +4,11 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
-from s3.client import S3Client
-from s3.query_loader import QueryLoader
-from mysqldb.client import MYSQLClient
-from mysqldb.query_handler import QueryHandler
-from s3.utils import *
+from s3_client import S3Client
+from s3_query_loader import QueryLoader
+from mysql_client import MYSQLClient
+from mysql_query_handler import QueryHandler
+from s3_utils import *
 from utils import *
 
 # Job Parameters
