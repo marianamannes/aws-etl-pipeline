@@ -33,7 +33,7 @@ job.init(args['JOB_NAME'], args)
 s3_client = S3Client()
 
 # Get s3 object content
-dataset = get_s3_obj_df(s3_client, 'superstore-ingestion', 'dataset_3.csv')
+dataset = get_s3_obj_df(s3_client, args['CSV_BUCKET'], args['OBJECT_KEY'])
 
 # Get s3 object length
 dataset_len = len(dataset)
