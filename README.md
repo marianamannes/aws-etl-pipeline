@@ -37,7 +37,7 @@ The dataset used in this project was the Kaggle [Global Super Store Dataset](htt
 	An AWS Glue job was created to handle the data extraction, transformation, and loading processes. The job retrieved the raw data from the S3 bucket, applied necessary transformations to normalize the data into a structured format suitable for a data warehouse, and then loaded the transformed data into a MySQL database hosted on Amazon RDS. The [main.py](https://github.com/marianamannes/aws-etl-pipeline/blob/main/glue/main.py) file was added as a script for the Glue job, and the remaining files in the [glue/](https://github.com/marianamannes/aws-etl-pipeline/tree/main/glue) directory were added as extra Python files for the job.
 5. Setting up Lambda
    
-	A [Lambda script]() was created to initialize the ETL every time a new file is added to the bucket by invoking the AWS Glue job. AWS S3 Event Notifications were set up to trigger an AWS Lambda function whenever a new file was uploaded to the S3 bucket.
+	A [Lambda script](https://github.com/marianamannes/aws-etl-pipeline/blob/main/lambda/lambda_function.py) was created to initialize the ETL every time a new file is added to the bucket by invoking the AWS Glue job. AWS S3 Event Notifications were set up to trigger an AWS Lambda function whenever a new file was uploaded to the S3 bucket.
 6. Testing the Pipeline
    
 	One file from data/datasets was added at a time to the S3 bucket to test the pipeline.
