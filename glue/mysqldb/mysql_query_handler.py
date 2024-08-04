@@ -66,7 +66,7 @@ class QueryHandler:
         print('Inserted to ' + table + ' : ' + str(table_len))
         if dataset_len == table_len:
             print('Successful ingestion')
+            return True
         else:   
             print('ERROR')
-        self.mysql.close_cursor()
-        
+            return False

@@ -35,7 +35,7 @@ s3_client = S3Client()
 # Get s3 object content
 dataset = get_s3_obj_df(s3_client, 'superstore-ingestion', 'dataset_3.csv')
 
-# Ge s3 object lenght
+# Get s3 object length
 dataset_len = len(dataset)
 
 # Convert dataset to 3NF
@@ -65,6 +65,14 @@ query_handler.create_and_populate_temp_tables()
 query_handler.insert_values_to_final_tables()
 
 # Validate ingestion
-query_handler.validate_ingestion(dataset_len, 'order_items')
+validation = query_handler.validate_ingestion(dataset_len, 'order_items')
 
+# Close cursor
+mysql_client.close_cursor()
+
+# Commit the job
 job.commit()
+
+# Fail the job if ingestion is not successful
+if not validation:
+    sys.exit("Not successful ingestion")
