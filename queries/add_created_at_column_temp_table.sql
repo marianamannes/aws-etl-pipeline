@@ -1,1 +1,1 @@
-ALTER TABLE {table} ADD COLUMN created_at TIMESTAMP
+alter table {table} add column created_at timestamp
