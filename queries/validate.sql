@@ -1,1 +1,1 @@
-SELECT COUNT(*) FROM {table} WHERE created_at = '{timestamp}'
+select count(*) from {table} where created_at = '{timestamp}'

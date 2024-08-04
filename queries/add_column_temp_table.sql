@@ -1,1 +1,1 @@
-ALTER TABLE {table} ADD COLUMN {column} VARCHAR(200)
+alter table {table} add column {column} varchar(200)

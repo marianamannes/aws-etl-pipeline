@@ -1,2 +1,2 @@
-CREATE TEMPORARY TABLE {} (id INT NOT NULL AUTO_INCREMENT,
-                           PRIMARY KEY (`id`))
+create temporary table {} (id int not null auto_increment,
+                           primary key (`id`))
