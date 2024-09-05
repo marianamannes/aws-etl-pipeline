@@ -25,7 +25,7 @@ The dataset used in this project was the Kaggle [Global Super Store Dataset](htt
 ## Project Steps
 1. Setting up the Data Sample
   
-	A [Python script](https://github.com/marianamannes/aws-etl-pipeline/blob/main/data/split_dataset.py) was created to split the [Global Super Store Dataset](https://www.kaggle.com/datasets/apoorvaappz/global-super-store-dataset?resource=download) into 5 files for testing the pipeline. The datasets were added to the data/datasets path.
+	A [Python script](https://github.com/marianamannes/aws-etl-pipeline/blob/main/data/split_dataset.py) was created to split the [Global Super Store Dataset](https://www.kaggle.com/datasets/apoorvaappz/global-super-store-dataset?resource=download) into 5 files for testing the pipeline. The datasets were added to the [data/datasets](https://github.com/marianamannes/aws-etl-pipeline/tree/main/data/datasets) path.
 2. Setting up S3
    
 	A bucket called superstore-ingestion was created to store raw data files. This bucket served as the initial data source for the ETL pipeline.
